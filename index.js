@@ -2,9 +2,9 @@ const colorForm = document.getElementById('color-form')
 const colorImgContainerArr = document.querySelectorAll('.color-img-container')
 const colorLabelArr = document.querySelectorAll('.color-label')
 const inputColor = document.querySelector("input[type='color']")
-const darkModeSwitch = document.getElementById('switch')
+const switchGrid = document.getElementById('switch-grid')
 
-
+handleWindowSizeChange()
 randomFetchAndRender()
 
 colorForm.addEventListener('submit', function(event){
@@ -18,21 +18,29 @@ colorForm.addEventListener('submit', function(event){
     
 })
 
-// window.addEventListener('resize', function(event){
-//     if (window.innerWidth >= 480){
-//         darkModeSwitch.innerHTML = `
-//             <i class="fa-regular fa-lightbulb"></i>
-//             <input type="checkbox">
-//             <span class="slider round"></span>
-//             <i class="fa-solid fa-lightbulb"></i>
-//         `
-//     } else {
-//         darkModeSwitch.innerHTML = `
-//             <input type="checkbox">
-//             <span class="slider round"></span>
-//         `
-//     }
-// })
+window.addEventListener('resize', function(event){
+    handleWindowSizeChange()
+})
+
+function handleWindowSizeChange(){
+    if (window.innerWidth >= 320){
+        switchGrid.innerHTML = `
+            <i class="fa-solid fa-lightbulb"></i>
+            <label class="switch" id='switch'>
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+            </label>
+            <i class="fa-regular fa-lightbulb"></i>
+        `
+    } else {
+        switchGrid.innerHTML = `
+            <label class="switch" id='switch'>
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+            </label>
+        `
+    }
+}
 
 function randomFetchAndRender(){
     // Generate a random hex number
