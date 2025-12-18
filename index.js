@@ -9,6 +9,7 @@ const dropDown = document.querySelector('select')
 const hexInput = document.getElementById('hex-input')
 const statusMsg = document.getElementById('status-msg')
 
+let colorHexArr = []
 
 // Check user's prefer mode is dark or not
 let darkModeFlag = ''
@@ -18,15 +19,8 @@ if (isDarkModePreferred){
 }
 
 
-
-
 colorForm.addEventListener('submit', function(event){
     event.preventDefault()
-    
-    
-    // const colorFormData = new FormData(colorForm)
-    // const colorHex = colorFormData.get('input-color').slice(1) //#000000
-    // const colorMode = colorFormData.get('drop-down') //monochrome
 
     const colorHex = getColorFromPicker()[0]
     const colorMode = getColorFromPicker()[1]
@@ -44,6 +38,12 @@ inputColor.addEventListener('change', function(){
 hexInput.addEventListener('keypress', function(event){
     if (event.key === 'Enter'){
         handleTextInputChange()
+    }
+})
+
+document.addEventListener('click', function(event){
+    if(event.target.dataset.colorId){
+        handleCopyText(event.target.dataset.colorId)
     }
 })
 
@@ -79,6 +79,11 @@ function handleTextInputChange(){
     const colorMode = getColorFromPicker()[1]
 
     fetchAndRenderColor(colorHex, colorMode)
+}
+
+function handleCopyText(colorId){
+    navigator.clipboard.writeText(colorHexArr[Number(colorId)-1])
+    statusMsg.textContent = 'Color copied!'
 }
 
 function handleWindowSizeChange(){
@@ -186,7 +191,6 @@ function randomFetchAndRender(){
 
     document.querySelector(`option[value='${randColorMode}']`).setAttribute('selected', '')
 
-    console.log(randColorHex, randColorMode)
     fetchAndRenderColor(randColorHex, randColorMode)
     
 }
@@ -203,12 +207,15 @@ function fetchAndRenderColor(colorHex, colorMode){
 }
 
 function renderColor(data) {
+
+    colorHexArr = []
+
     for (let i=0; i<data.colors.length; i++){
         colorImgContainerArr[i].src = data.colors[i].image.bare
         colorLabelArr[i].textContent = data.colors[i].hex.value
+        colorHexArr.push(data.colors[i].hex.value)
     }
 
     handleInputColorChange()
     statusMsg.textContent = 'Get Color to start...'
-
 }
