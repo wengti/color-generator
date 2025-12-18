@@ -2,6 +2,8 @@
 body {
     margin: 0;
     font-family: Roboto, sans-serif;
+    background-color: whitesmoke;
+    color: black;
 }
 
 * {
@@ -17,6 +19,7 @@ h1 {
 header {
     border-bottom: 1px solid black;
     background: radial-gradient(circle,rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+    color: black;
 }
 
 .container {
@@ -38,30 +41,35 @@ header {
 
 /* Form */
 .color-form {
-    display: flex;
-    gap: 0.5em;
+    display: grid;
     padding-top: 1em;
     padding-bottom: 1em;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0.5em;
+    align-items: center;
     
 }
 
 .input-color {
     border-radius: 5px;
-    width: 15%
+    width: 100%;
+    grid-column: span 3;
 }
 
 .drop-down{
     padding-left: 0.5em;
-    width: 70%;
+    grid-column: span 9;
 }
 
-.color-btn {
+.btn {
     background-color: white;
     text-align: center;
+    grid-column: 9 / 13;
+    height: 100%;
 }
 
 .drop-down,
-.color-btn{
+.btn{
     border-radius: 5px;
     border: 1px solid gray;
 }
@@ -69,6 +77,68 @@ header {
 .drop-down,
 .drop-down-option {
     text-transform: capitalize;
+}
+
+/* Slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 39.6px;
+  height: 100%;
+  grid-column: span 3;
+  justify-self: center;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 50%;
+  left: 0px;
+  bottom: 0px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(100%);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 /* Color Container */
@@ -102,6 +172,68 @@ header {
     text-align: center;
 }
 
+/* Dark Mode */
+@media (prefers-color-scheme: dark){
+
+    body,
+    .input-color,
+    .drop-down,
+    .btn{
+        color: white;
+    }
+
+    body {
+        background-color: #282828;
+    }
+
+    .input-color,
+    .drop-down,
+    .btn{
+        background-color: #666666;
+    }
+
+    .color-container{
+        background-color: #232525;
+    }
+    
+    .color-label-container{
+        border: 1px solid whitesmoke;
+    }
+}
+
+/* Light Mode */
+
+.light-bg{
+    background-color: whitesmoke;
+    color: black;
+}
+
+.light-border{
+    border: 1px solid whitesmoke;
+}
+
+/* class to be toggled when it is manually switched  */
+/* Dark Mode */
+/* .dark-body,
+.dark-form{
+    color: white;
+}
+
+.dark-body {
+    background-color: #282828;
+}
+
+.dark-form{
+    background-color: #666666;
+}
+
+.dark-color-container{
+    background-color: #232525;
+}
+
+.dark-color-label-container{
+    border: 1px solid whitesmoke;
+} */
 
 
 
