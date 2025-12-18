@@ -80,14 +80,21 @@ header {
 }
 
 /* Slider */
+
+.switch-grid {
+    grid-column: 1 / span 3;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .switch {
   position: relative;
   display: inline-block;
   width: 100%;
   max-width: 39.6px;
   height: 100%;
-  grid-column: span 3;
-  justify-self: center;
 }
 
 .switch input { 

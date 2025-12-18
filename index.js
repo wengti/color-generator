@@ -18,20 +18,21 @@ colorForm.addEventListener('submit', function(event){
     
 })
 
-window.addEventListener('resize', function(event){
-    if (window.innerWidth >= 480){
-        darkModeSwitch.innerHTML = `
-            
-            <input type="checkbox">
-            <span class="slider round"></span>
-        `
-    } else {
-        darkModeSwitch.innerHTML = `
-            <input type="checkbox">
-            <span class="slider round"></span>
-        `
-    }
-})
+// window.addEventListener('resize', function(event){
+//     if (window.innerWidth >= 480){
+//         darkModeSwitch.innerHTML = `
+//             <i class="fa-regular fa-lightbulb"></i>
+//             <input type="checkbox">
+//             <span class="slider round"></span>
+//             <i class="fa-solid fa-lightbulb"></i>
+//         `
+//     } else {
+//         darkModeSwitch.innerHTML = `
+//             <input type="checkbox">
+//             <span class="slider round"></span>
+//         `
+//     }
+// })
 
 function randomFetchAndRender(){
     // Generate a random hex number
