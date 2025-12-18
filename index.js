@@ -50,6 +50,7 @@ hexInput.addEventListener('keypress', function(event){
 
 
 handleWindowSizeChange()
+handleDarkModeSwitch(false) // dont change the flag, just change appearance as light / dark
 randomFetchAndRender()
 
 
@@ -82,13 +83,24 @@ function handleTextInputChange(){
 
 function handleWindowSizeChange(){
     if (window.innerWidth >= 320){
+
+        let leftBulbType = ''
+        let rightBulbType = ''
+        if (darkModeFlag) {
+            leftBulbType = 'fa-solid'
+            rightBulbType = 'fa-regular'
+        } else {
+            leftBulbType = 'fa-regular'
+            rightBulbType = 'fa-solid'
+        }
+
         switchGrid.innerHTML = `
-            <i class="fa-lightbulb" id='left-bulb'></i>
+            <i class="${leftBulbType} fa-lightbulb" id='left-bulb'></i>
             <label class="switch" id='switch'>
                 <input type="checkbox" ${darkModeFlag}>
                 <span class="slider round"></span>
             </label>
-            <i class="fa-lightbulb" id='right-bulb'></i>
+            <i class="${rightBulbType} fa-lightbulb" id='right-bulb'></i>
         `
     } else {
         switchGrid.innerHTML = `
@@ -102,14 +114,19 @@ function handleWindowSizeChange(){
     // Add here to prevent the event listener after window resize
     // Also enter it to change the dark mode if necessary
     document.querySelector("input[type='checkbox']").addEventListener('change', handleDarkModeSwitch)
-    handleDarkModeSwitch() //Not sure why have to call it outside the Event Listener to not get broken result
 }
 
 
-function handleDarkModeSwitch() {
+function handleDarkModeSwitch(toggle=true) {
 
     const leftBulb = document.getElementById('left-bulb')
     const rightBulb = document.getElementById('right-bulb')
+
+    if (toggle && darkModeFlag){
+        darkModeFlag = ''
+    } else if (toggle && !darkModeFlag){
+        darkModeFlag = 'checked'
+    }
     
     if(darkModeFlag){
         document.body.classList.add('dark-body')
@@ -122,11 +139,13 @@ function handleDarkModeSwitch() {
         colorContainer.classList.add('dark-color-container')
         colorLabelContainerArr.forEach( 
             elem => elem.classList.add('dark-color-label-container'))
-
-        leftBulb.classList.add('fa-solid')
-        leftBulb.classList.remove('fa-regular')
-        rightBulb.classList.add('fa-regular')
-        rightBulb.classList.remove('fa-solid')
+        
+        if (leftBulb && rightBulb){
+            leftBulb.classList.add('fa-solid')
+            leftBulb.classList.remove('fa-regular')
+            rightBulb.classList.add('fa-regular')
+            rightBulb.classList.remove('fa-solid')
+        }
     } else {
         document.body.classList.remove('dark-body')
         
@@ -138,14 +157,14 @@ function handleDarkModeSwitch() {
         colorContainer.classList.remove('dark-color-container')
         colorLabelContainerArr.forEach( 
             elem => elem.classList.remove('dark-color-label-container'))
-
-        leftBulb.classList.remove('fa-solid')
-        leftBulb.classList.add('fa-regular')
-        rightBulb.classList.remove('fa-regular')
-        rightBulb.classList.add('fa-solid')
+        
+        if (leftBulb && rightBulb){
+            leftBulb.classList.remove('fa-solid')
+            leftBulb.classList.add('fa-regular')
+            rightBulb.classList.remove('fa-regular')
+            rightBulb.classList.add('fa-solid')
+        }
     }
-
-    darkModeFlag = !darkModeFlag
 }
 
 function randomFetchAndRender(){

@@ -167,7 +167,7 @@ input:checked + .slider:before {
     display: grid;
     grid-template-columns: 1fr 2rem;
     grid-template-rows: repeat(5, 1fr);
-    height: 70vh;
+    height: 69vh;
     width: 95%;
     padding-left: 0; /* Override container */
     padding-right: 0; /* Override container */
