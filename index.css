@@ -179,48 +179,8 @@ input:checked + .slider:before {
     text-align: center;
 }
 
-/* Dark Mode */
-/* @media (prefers-color-scheme: dark){
 
-    body,
-    .input-color,
-    .drop-down,
-    .btn{
-        color: white;
-    }
-
-    body {
-        background-color: #282828;
-    }
-
-    .input-color,
-    .drop-down,
-    .btn{
-        background-color: #666666;
-    }
-
-    .color-container{
-        background-color: #232525;
-    }
-    
-    .color-label-container{
-        border: 1px solid whitesmoke;
-    }
-} */
-
-/* Light Mode */
-
-/* .light-bg{
-    background-color: whitesmoke;
-    color: black;
-}
-
-.light-border{
-    border: 1px solid whitesmoke;
-} */
-
-/* class to be toggled when it is manually switched  */
-/* Dark Mode  */
+/* Dark Mode  Utility Class*/
 .dark-body,
 .dark-form{
     color: white;

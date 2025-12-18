@@ -40,12 +40,12 @@ window.addEventListener('resize', function(event){
 function handleWindowSizeChange(){
     if (window.innerWidth >= 320){
         switchGrid.innerHTML = `
-            <i class="fa-solid fa-lightbulb"></i>
+            <i class="fa-lightbulb" id='left-bulb'></i>
             <label class="switch" id='switch'>
                 <input type="checkbox" ${darkModeFlag}>
                 <span class="slider round"></span>
             </label>
-            <i class="fa-regular fa-lightbulb"></i>
+            <i class="fa-lightbulb" id='right-bulb'></i>
         `
     } else {
         switchGrid.innerHTML = `
@@ -63,6 +63,9 @@ function handleWindowSizeChange(){
 }
 //() => {handleDarkModeSwitch()
 function handleDarkModeSwitch() {
+
+    const leftBulb = document.getElementById('left-bulb')
+    const rightBulb = document.getElementById('right-bulb')
     
     if(darkModeFlag){
         document.body.classList.add('dark-body')
@@ -73,6 +76,11 @@ function handleDarkModeSwitch() {
         colorContainer.classList.add('dark-color-container')
         colorLabelContainerArr.forEach( 
             elem => elem.classList.add('dark-color-label-container'))
+
+        leftBulb.classList.add('fa-solid')
+        leftBulb.classList.remove('fa-regular')
+        rightBulb.classList.add('fa-regular')
+        rightBulb.classList.remove('fa-solid')
     } else {
         document.body.classList.remove('dark-body')
         inputColor.classList.remove('dark-form')
@@ -82,9 +90,12 @@ function handleDarkModeSwitch() {
         colorContainer.classList.remove('dark-color-container')
         colorLabelContainerArr.forEach( 
             elem => elem.classList.remove('dark-color-label-container'))
-    }
 
-    console.log('hi')
+        leftBulb.classList.remove('fa-solid')
+        leftBulb.classList.add('fa-regular')
+        rightBulb.classList.remove('fa-regular')
+        rightBulb.classList.add('fa-solid')
+    }
 
     darkModeFlag = !darkModeFlag
 }
