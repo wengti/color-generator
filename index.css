@@ -1,0 +1,107 @@
+/* General */
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 0;
+    
+}
+
+/* General Layout */
+header {
+    border-bottom: 1px solid black;
+    background: radial-gradient(circle,rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+}
+
+.container {
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header */
+.header-container{
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-shadow: 0 1px 1px white;
+}
+
+/* Form */
+.color-form {
+    display: flex;
+    gap: 0.5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    
+}
+
+.input-color {
+    border-radius: 5px;
+    width: 15%
+}
+
+.drop-down{
+    padding-left: 0.5em;
+    width: 70%;
+}
+
+.color-btn {
+    background-color: white;
+    text-align: center;
+}
+
+.drop-down,
+.color-btn{
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.drop-down,
+.drop-down-option {
+    text-transform: capitalize;
+}
+
+/* Color Container */
+.color-container {
+    display: grid;
+    grid-template-columns: 1fr 2rem;
+    grid-template-rows: repeat(5, 1fr);
+    height: 75vh;
+    width: 95%;
+    padding-left: 0; /* Override container */
+    padding-right: 0; /* Override container */
+}
+
+.color-grid-cell {
+    overflow: hidden;
+}
+
+.color-img-container {
+    width: 100%;
+}
+
+.color-label-container {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black
+}
+
+.color-label {
+    writing-mode: vertical-lr;
+    text-orientation: sideways;
+    text-align: center;
+}
+
+
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>A color palette generator</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+        <link rel='stylesheet' href='./index.css' />
+
+        <!-- Roboto Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <div class='container header-container'>
+                <h1>Color Palette Generator</h1>
+            </div>
+        </header>
+
+        <main>
+            <form class='container color-form'>
+                <input type='color' name='input-color' class='input-color'/>
+                <select name='drop-down' class='drop-down'>
+                    <option value='monochrome' class='drop-down-option'>monochrome</option>
+                    <option value='monochrome-dark' class='drop-down-option'>monochrome-dark</option>
+                    <option value='monochrome-light' class='drop-down-option'>monochrome-light</option>
+                    <option value='analogic' class='drop-down-option'>analogic</option>
+                    <option value='complement' class='drop-down-option'>complement</option>
+                    <option value='analogic-complement' class='drop-down-option'>analogic-complement</option>
+                    <option value='triad' class='drop-down-option'>triad</option>
+                    <option value='quad' class='drop-down-option'>quad</option>
+                </select>
+                <input type='submit' value='Get color' class='color-btn'/>
+            </form>
+
+            <div class='container color-container'>
+                <div class='color-grid-cell'>
+                    <img src='https://www.thecolorapi.com/id?format=svg&named=false&hex=04429A' 
+                    class ='color-img-container' id='color-1'/>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-1' class='color-label'>#04429A</label>
+                </div>
+
+                <div class='color-grid-cell'>
+                    <img src='https://www.thecolorapi.com/id?format=svg&named=false&hex=04429A' 
+                    class ='color-img-container' id='color-2'/>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-2' class='color-label'>#04429A</label>
+                </div>
+                
+                <div class='color-grid-cell'>
+                    <img src='https://www.thecolorapi.com/id?format=svg&named=false&hex=04429A' 
+                    class ='color-img-container' id='color-3'/>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-3' class='color-label'>#04429A</label>
+                </div>
+
+                <div class='color-grid-cell'>
+                    <img src='https://www.thecolorapi.com/id?format=svg&named=false&hex=04429A' 
+                    class ='color-img-container' id='color-4'/>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-4' class='color-label'>#04429A</label>
+                </div>
+
+                <div class='color-grid-cell'>
+                    <img src='https://www.thecolorapi.com/id?format=svg&named=false&hex=04429A' 
+                    class ='color-img-container' id='color-5'/>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-5' class='color-label'>#04429A</label>
+                </div>
+            </div>
+
+        </main>
+
+    </body>
+</html>
