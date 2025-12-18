@@ -24,6 +24,9 @@
         </header>
 
         <main>
+            
+            <div class='container status-container' id='status-msg'>Get color to start!</div>
+
             <form class='container color-form' id='color-form'>
                 <input type='color' name='input-color' class='input-color'/>
 
@@ -37,6 +40,10 @@
                     <option value='triad' class='drop-down-option'>triad</option>
                     <option value='quad' class='drop-down-option'>quad</option>
                 </select>
+
+                <input type='text' class='hex-input' 
+                    id='hex-input' placeholder='hex value'/
+                    pattern = '^#[0-9A-Fa-f]{6}$'>
                 
                 <div class='switch-grid' id='switch-grid'>
                     <label class="switch" id='switch'>
@@ -45,7 +52,7 @@
                     </label>
                 </div>
 
-                <input type='submit' value='Get color' class='btn color-btn'/>
+                <input type='submit' value='Get Color' class='btn color-btn'/>
             </form>
 
             <div class='container color-container' id='color-container'>

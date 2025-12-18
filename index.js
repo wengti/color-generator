@@ -5,8 +5,9 @@ const inputColor = document.querySelector("input[type='color']")
 const switchGrid = document.getElementById('switch-grid')
 const colorContainer = document.getElementById('color-container')
 const colorLabelContainerArr = Array.from(document.getElementsByClassName('color-label-container'))
-const btnArr = Array.from(document.getElementsByClassName('btn'))
 const dropDown = document.querySelector('select')
+const hexInput = document.getElementById('hex-input')
+const statusMsg = document.getElementById('status-msg')
 
 
 // Check user's prefer mode is dark or not
@@ -17,25 +18,67 @@ if (isDarkModePreferred){
 }
 
 
-handleWindowSizeChange()
-randomFetchAndRender()
+
 
 colorForm.addEventListener('submit', function(event){
     event.preventDefault()
-
-    const colorFormData = new FormData(colorForm)
-    const colorHex = colorFormData.get('input-color').slice(1) //#000000
-    const colorMode = colorFormData.get('drop-down') //monochrome
-
-    fetchAndRenderColor(colorHex, colorMode)
     
+    
+    // const colorFormData = new FormData(colorForm)
+    // const colorHex = colorFormData.get('input-color').slice(1) //#000000
+    // const colorMode = colorFormData.get('drop-down') //monochrome
+
+    const colorHex = getColorFromPicker()[0]
+    const colorMode = getColorFromPicker()[1]
+    fetchAndRenderColor(colorHex, colorMode)
 })
 
 window.addEventListener('resize', function(event){
     handleWindowSizeChange()
 })
 
+inputColor.addEventListener('change', function(){
+    handleInputColorChange()
+})
 
+hexInput.addEventListener('keypress', function(event){
+    if (event.key === 'Enter'){
+        handleTextInputChange()
+    }
+})
+
+
+
+handleWindowSizeChange()
+randomFetchAndRender()
+
+
+
+
+
+
+
+
+function handleInputColorChange(){
+    hexInput.value = inputColor.value
+}
+
+function getColorFromPicker(){
+    const colorFormData = new FormData(colorForm)
+    const colorHex = colorFormData.get('input-color').slice(1) //#000000
+    const colorMode = colorFormData.get('drop-down') //monochrome
+
+    return [colorHex, colorMode]
+}
+
+function handleTextInputChange(){
+    inputColor.value = hexInput.value 
+
+    const colorHex = getColorFromPicker()[0]
+    const colorMode = getColorFromPicker()[1]
+
+    fetchAndRenderColor(colorHex, colorMode)
+}
 
 function handleWindowSizeChange(){
     if (window.innerWidth >= 320){
@@ -61,7 +104,8 @@ function handleWindowSizeChange(){
     document.querySelector("input[type='checkbox']").addEventListener('change', handleDarkModeSwitch)
     handleDarkModeSwitch() //Not sure why have to call it outside the Event Listener to not get broken result
 }
-//() => {handleDarkModeSwitch()
+
+
 function handleDarkModeSwitch() {
 
     const leftBulb = document.getElementById('left-bulb')
@@ -69,10 +113,12 @@ function handleDarkModeSwitch() {
     
     if(darkModeFlag){
         document.body.classList.add('dark-body')
-        inputColor.classList.add('dark-form')
+
+        document.querySelectorAll('input').forEach( elem => {
+            elem.classList.add('dark-form')
+        })
         dropDown.classList.add('dark-form')
-        btnArr.forEach( 
-            elem => elem.classList.add('dark-form'))
+        
         colorContainer.classList.add('dark-color-container')
         colorLabelContainerArr.forEach( 
             elem => elem.classList.add('dark-color-label-container'))
@@ -83,10 +129,12 @@ function handleDarkModeSwitch() {
         rightBulb.classList.remove('fa-solid')
     } else {
         document.body.classList.remove('dark-body')
-        inputColor.classList.remove('dark-form')
+        
+        document.querySelectorAll('input').forEach( elem => {
+            elem.classList.remove('dark-form')
+        })
         dropDown.classList.remove('dark-form')
-        btnArr.forEach( 
-            elem => elem.classList.remove('dark-form'))
+        
         colorContainer.classList.remove('dark-color-container')
         colorLabelContainerArr.forEach( 
             elem => elem.classList.remove('dark-color-label-container'))
@@ -126,10 +174,13 @@ function randomFetchAndRender(){
 
 function fetchAndRenderColor(colorHex, colorMode){
     const api = `https://www.thecolorapi.com/scheme?hex=${colorHex}&mode=${colorMode}&count=5`
+    statusMsg.textContent = 'Getting color...'
 
     fetch(api)
         .then(res => res.json())
-        .then(data => {renderColor(data)})
+        .then(data => {
+            renderColor(data)
+        })
 }
 
 function renderColor(data) {
@@ -137,4 +188,8 @@ function renderColor(data) {
         colorImgContainerArr[i].src = data.colors[i].image.bare
         colorLabelArr[i].textContent = data.colors[i].hex.value
     }
+
+    handleInputColorChange()
+    statusMsg.textContent = 'Get Color to start...'
+
 }

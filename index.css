@@ -39,10 +39,16 @@ header {
     text-shadow: 0 1px 1px white;
 }
 
+/* Status container */
+.status-container{
+    padding-top: 0.4em;
+    text-align: center;
+}
+
 /* Form */
 .color-form {
     display: grid;
-    padding-top: 1em;
+    padding-top: 0.4em;
     padding-bottom: 1em;
     grid-template-columns: repeat(12, 1fr);
     gap: 0.5em;
@@ -68,8 +74,14 @@ header {
     height: 100%;
 }
 
+.hex-input {
+    grid-column: 1 / span 3;
+    text-align: center;
+}
+
 .drop-down,
-.btn{
+.btn,
+.hex-input{
     border-radius: 5px;
     border: 1px solid gray;
 }
@@ -79,10 +91,12 @@ header {
     text-transform: capitalize;
 }
 
+
+
 /* Slider */
 
 .switch-grid {
-    grid-column: 1 / span 3;
+    grid-column: 6 / span 3;
     display: flex;
     width: 100%;
     align-items: center;
@@ -153,7 +167,7 @@ input:checked + .slider:before {
     display: grid;
     grid-template-columns: 1fr 2rem;
     grid-template-rows: repeat(5, 1fr);
-    height: 75vh;
+    height: 70vh;
     width: 95%;
     padding-left: 0; /* Override container */
     padding-right: 0; /* Override container */
