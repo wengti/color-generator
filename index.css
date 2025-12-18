@@ -180,7 +180,7 @@ input:checked + .slider:before {
 }
 
 /* Dark Mode */
-@media (prefers-color-scheme: dark){
+/* @media (prefers-color-scheme: dark){
 
     body,
     .input-color,
@@ -206,22 +206,22 @@ input:checked + .slider:before {
     .color-label-container{
         border: 1px solid whitesmoke;
     }
-}
+} */
 
 /* Light Mode */
 
-.light-bg{
+/* .light-bg{
     background-color: whitesmoke;
     color: black;
 }
 
 .light-border{
     border: 1px solid whitesmoke;
-}
+} */
 
 /* class to be toggled when it is manually switched  */
-/* Dark Mode */
-/* .dark-body,
+/* Dark Mode  */
+.dark-body,
 .dark-form{
     color: white;
 }
@@ -240,7 +240,7 @@ input:checked + .slider:before {
 
 .dark-color-label-container{
     border: 1px solid whitesmoke;
-} */
+}
 
 
 

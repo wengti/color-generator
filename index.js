@@ -3,6 +3,19 @@ const colorImgContainerArr = document.querySelectorAll('.color-img-container')
 const colorLabelArr = document.querySelectorAll('.color-label')
 const inputColor = document.querySelector("input[type='color']")
 const switchGrid = document.getElementById('switch-grid')
+const colorContainer = document.getElementById('color-container')
+const colorLabelContainerArr = Array.from(document.getElementsByClassName('color-label-container'))
+const btnArr = Array.from(document.getElementsByClassName('btn'))
+const dropDown = document.querySelector('select')
+
+
+// Check user's prefer mode is dark or not
+let darkModeFlag = ''
+const isDarkModePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (isDarkModePreferred){
+    darkModeFlag = 'checked'
+}
+
 
 handleWindowSizeChange()
 randomFetchAndRender()
@@ -22,12 +35,14 @@ window.addEventListener('resize', function(event){
     handleWindowSizeChange()
 })
 
+
+
 function handleWindowSizeChange(){
     if (window.innerWidth >= 320){
         switchGrid.innerHTML = `
             <i class="fa-solid fa-lightbulb"></i>
             <label class="switch" id='switch'>
-                <input type="checkbox" checked>
+                <input type="checkbox" ${darkModeFlag}>
                 <span class="slider round"></span>
             </label>
             <i class="fa-regular fa-lightbulb"></i>
@@ -35,11 +50,43 @@ function handleWindowSizeChange(){
     } else {
         switchGrid.innerHTML = `
             <label class="switch" id='switch'>
-                <input type="checkbox" checked>
+                <input type="checkbox" ${darkModeFlag}>
                 <span class="slider round"></span>
             </label>
         `
     }
+
+    // Add here to prevent the event listener after window resize
+    // Also enter it to change the dark mode if necessary
+    document.querySelector("input[type='checkbox']").addEventListener('change', handleDarkModeSwitch)
+    handleDarkModeSwitch() //Not sure why have to call it outside the Event Listener to not get broken result
+}
+//() => {handleDarkModeSwitch()
+function handleDarkModeSwitch() {
+    
+    if(darkModeFlag){
+        document.body.classList.add('dark-body')
+        inputColor.classList.add('dark-form')
+        dropDown.classList.add('dark-form')
+        btnArr.forEach( 
+            elem => elem.classList.add('dark-form'))
+        colorContainer.classList.add('dark-color-container')
+        colorLabelContainerArr.forEach( 
+            elem => elem.classList.add('dark-color-label-container'))
+    } else {
+        document.body.classList.remove('dark-body')
+        inputColor.classList.remove('dark-form')
+        dropDown.classList.remove('dark-form')
+        btnArr.forEach( 
+            elem => elem.classList.remove('dark-form'))
+        colorContainer.classList.remove('dark-color-container')
+        colorLabelContainerArr.forEach( 
+            elem => elem.classList.remove('dark-color-label-container'))
+    }
+
+    console.log('hi')
+
+    darkModeFlag = !darkModeFlag
 }
 
 function randomFetchAndRender(){
