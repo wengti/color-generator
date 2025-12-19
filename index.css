@@ -239,6 +239,20 @@ input:checked + .slider:before {
     text-align: center;
 }
 
+/* Reference Container */
+
+.reference-container{
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.reference-link{
+    color: black;
+}
+
+
+
+/* Responsive Design */
 @media (min-width: 400px){
     .radio-container{
         font-size: 1rem;
@@ -266,6 +280,10 @@ input:checked + .slider:before {
 
 .dark-color-label-container{
     border: 1px solid whitesmoke;
+}
+
+.dark-text {
+    color: white;
 }
 
 

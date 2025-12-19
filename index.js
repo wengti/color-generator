@@ -295,6 +295,10 @@ function handleDarkModeSwitch(toggle=true) {
             elem.classList.add('dark-form')
         })
         dropDown.classList.add('dark-form')
+    
+        document.getElementById('reference-link').classList.add('dark-text')
+
+        dropDown.classList.add('dark-form')
         
         colorContainer.classList.add('dark-color-container')
         colorLabelContainerArr.forEach( 
@@ -313,6 +317,10 @@ function handleDarkModeSwitch(toggle=true) {
             elem.classList.remove('dark-form')
         })
         dropDown.classList.remove('dark-form')
+
+        document.getElementById('reference-link').classList.remove('dark-text')
+
+        
         
         colorContainer.classList.remove('dark-color-container')
         colorLabelContainerArr.forEach( 
