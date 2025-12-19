@@ -263,7 +263,7 @@ function renderColor(data, colorFormat='hex') {
     colorValArr = []
 
     for (let i=0; i<data.colors.length; i++){
-        colorImgContainerArr[i].src = data.colors[i].image.bare
+        colorImgContainerArr[i].style.backgroundColor = data.colors[i].hex.value
         
         switch(colorFormat){
             default:
