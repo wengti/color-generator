@@ -87,9 +87,23 @@ window.addEventListener('resize', function(event){
 
 
 document.addEventListener('click', function(event){
+
+    let id = ''
+    let saveColorFlag = false
+    let saveColorIdx = ''
+
     if(event.target.dataset.colorId){
-        handleCopyText(event.target.dataset.colorId)
+        id = event.target.dataset.colorId
+        saveColorFlag = false
+        saveColorIdx = ''
+        handleCopyText(id, saveColorFlag, saveColorIdx)
+    } else if(event.target.dataset.saveColorId){
+        id = event.target.dataset.saveColorId
+        saveColorFlag = true
+        saveColorIdx = event.target.dataset.saveColorIdx
+        handleCopyText(id, saveColorFlag, saveColorIdx)
     }
+    
 })
 
 document.addEventListener('dblclick', function(event){
@@ -132,17 +146,14 @@ async function handleSaveColor(){
 
     // Save the rendered result
     saveColorArr.unshift({
-        hex: '#' + getColorFromPicker()[0],
+        hex: '#' + getColorFromPicker()[0].toUpperCase(),
         mode: getColorFromPicker()[1],
         paletteArr: colorValArr,
         id: uuidv4()
     })
 
 
-    // Allow saving up to 20 results
-    if (saveColorArr.length > 20){
-        saveColorArr.pop()
-    }
+    statusMsg.textContent = 'Colors saved!'
 
     // Show the saved color table
     renderSavedColor()
@@ -165,7 +176,7 @@ function renderSavedColor(){
             </div>
 
             <div style="background-color: ${hex}" data-save-color-id=${id}
-                class='base-save-color'>
+                class='base-save-color' data-save-color-idx='0'>
                 ${hex}
             </div>
 
@@ -174,27 +185,27 @@ function renderSavedColor(){
             </button>
 
             <div style="background-color: ${paletteArr[0]}" data-save-color-id=${id}
-                class='color-palette'>
+                class='color-palette' data-save-color-idx='1'>
                 ${paletteArr[0]}
             </div>
 
             <div style="background-color: ${paletteArr[1]}" data-save-color-id=${id}
-                class='color-palette'>
+                class='color-palette' data-save-color-idx='2'>
                 ${paletteArr[1]}
             </div>
 
             <div style="background-color: ${paletteArr[2]}" data-save-color-id=${id}
-                class='color-palette'>
+                class='color-palette' data-save-color-idx='3'>
                 ${paletteArr[2]}
             </div>
 
             <div style="background-color: ${paletteArr[3]}" data-save-color-id=${id}
-                class='color-palette'>
+                class='color-palette' data-save-color-idx='4'>
                 ${paletteArr[3]}
             </div>
 
             <div style="background-color: ${paletteArr[4]}" data-save-color-id=${id}
-                class='color-palette'>
+                class='color-palette' data-save-color-idx='5'>
                 ${paletteArr[4]}
             </div>
         `
@@ -202,9 +213,6 @@ function renderSavedColor(){
 
     saveColorContainer.innerHTML = savedColorHtml
     
-
-    console.log(savedColorHtml)
-    console.log(saveColorArr)
 }
 
 
@@ -359,8 +367,20 @@ function renderColor(data, colorFormat='hex') {
 }
 
 // Copy //
-function handleCopyText(colorId){
-    navigator.clipboard.writeText(colorValArr[Number(colorId)-1])
+function handleCopyText(id, saveColorFlag=false, saveColorIdx=''){
+    if(!saveColorFlag){
+        navigator.clipboard.writeText(colorValArr[Number(id)-1])
+    } else{
+        const selectedColor = saveColorArr.filter(elem => elem.id === id)[0]
+        saveColorIdx = Number(saveColorIdx)
+        //Not 0
+        if(saveColorIdx){
+            navigator.clipboard.writeText(selectedColor.paletteArr[saveColorIdx-1])
+        } else {
+            navigator.clipboard.writeText(selectedColor.hex)
+        }
+
+    }
     statusMsg.textContent = 'Color copied!'
 }
 

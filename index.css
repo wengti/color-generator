@@ -249,6 +249,10 @@ input:checked + .slider:before {
 
 
 /* SAVE COLOR CONTAINER */
+.save-title-container{
+    text-align: center;
+}
+
 .save-color-container{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -265,7 +269,6 @@ input:checked + .slider:before {
 
 .base-save-color{
     grid-column: span 2;
-    text-align: center;
 }
 
 .del-save-btn{
@@ -274,6 +277,11 @@ input:checked + .slider:before {
 
 .color-palette {
     height: 100px;
+
+}
+
+.base-save-color,
+.color-palette{
     display: flex;
     align-items: center;
     justify-content: center;
