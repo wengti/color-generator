@@ -42,8 +42,7 @@ header, footer {
 /* Status container */
 .status-container{
     text-align: center;
-    grid-row: 1 / 2;
-    grid-column: 4 / 13;
+    grid-area: stat
 }
 
 /* Form */
@@ -52,23 +51,30 @@ header, footer {
     padding-top: 0.4em;
     padding-bottom: 1em;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(4,1fr);
-    gap: 0.5em;
+    grid-template-rows: repeat(6,1fr);
+    gap: 0.2em;
     align-items: center;
+    grid-template-areas: 
+        'swig swig swig stat stat stat stat stat stat stat stat stat'
+        'iclr iclr iclr iclr iclr iclr radi radi radi radi radi radi'
+        'hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi'
+        'rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi'
+        'hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli'
+        'drop drop drop drop drop drop drop drop drop drop drop drop'
+        'clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb';
     
 }
 
 .input-color {
     border-radius: 5px;
     width: 100%;
-    grid-column: span 3;
-    grid-row: 2 / 3;
+    grid-area: iclr;
 }
 
 .drop-down{
-    padding-left: 0.5em;
-    grid-column: 4 / 13;
-    grid-row: 4 / 5;
+    border: 0;
+    grid-area: drop;
+    text-align: center;
 }
 
 .btn {
@@ -77,8 +83,7 @@ header, footer {
 }
 
 .color-btn {
-    grid-column: 9 / 13;
-    grid-row: 2 / 3;
+    grid-area: clrb;
 }
 
 .color-value-input{
@@ -86,25 +91,21 @@ header, footer {
 }
 
 .rgb-input {
-    grid-column: span 6;
-    grid-row: 3 / 4;
+    grid-area: rgbi;
 }
 
 .hsl-input {
-    grid-column: span 6;
-    grid-row: 3 / 4;
+    grid-area: hsli;
 }
 
 .hex-input {
-    grid-column: 1 / 4;
-    grid-row: 4 / 5;
+    grid-area: hexi;
 }
 
 
 
 .radio-container {
-    grid-column: 4 / 9;
-    grid-row: 2 / 3;
+    grid-area: radi;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr;
     justify-content: center;
@@ -133,8 +134,7 @@ header, footer {
 /* Slider */
 
 .switch-grid {
-    grid-column: 1 / span 3;
-    grid-row: 1 / 2;
+    grid-area: swig;
     display: flex;
     width: 100%;
     align-items: center;
@@ -272,6 +272,19 @@ input:checked + .slider:before {
 }
 
 @media (min-width: 768px){
+
+    .color-form {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(5,1fr);
+        gap: 0.4em;
+        grid-template-areas: 
+            'swig swig swig stat stat stat stat stat stat stat stat stat'
+            'iclr iclr iclr iclr iclr iclr radi radi radi radi radi radi'
+            'hexi hexi hexi hexi rgbi rgbi rgbi rgbi hsli hsli hsli hsli'
+            'drop drop drop drop drop drop drop drop drop drop drop drop'
+            'clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb';    
+    }
+
     .color-container {
         grid-template-rows: 1fr 2rem;
         grid-template-columns: repeat(5, 1fr);
