@@ -14,7 +14,7 @@ const hexInput = document.getElementById('hex-input')
 const rgbInput = document.getElementById('rgb-input')
 const hslInput = document.getElementById('hsl-input')
 const statusMsg = document.getElementById('status-msg')
-const btnArr = Array.from(document.getElementsByClassName('btn'))
+const btnArr = Array.from(document.getElementsByClassName('btn')) //Not including del btn in saved color
 const saveBtn = document.getElementById('save-btn')
 const hexRadio = document.getElementById('hex')
 const saveColorContainer = document.getElementById('save-color-container')
@@ -110,6 +110,8 @@ document.addEventListener('click', function(event){
 document.addEventListener('dblclick', function(event){
     if (event.target.dataset.dblclick){
         handleCopyInputText(event.target)
+    } else if (event.target.id === 'del-save-btn'){
+        deleteSavedColor(event.target.dataset.paletteId)
     }
 })
 
@@ -130,6 +132,15 @@ handleDarkModeSwitch(toggleDarkModeFlag)
 
 // Fetch data from API for a random color
 randomFetchAndRender()
+
+
+
+
+function deleteSavedColor(paletteId){
+    const selectedPaletteIdx = saveColorArr.findIndex(elem => elem.id === paletteId)
+    saveColorArr.splice(selectedPaletteIdx, 1)
+    renderSavedColor()
+}
 
 
 async function handleSaveColor(){
@@ -160,6 +171,8 @@ async function handleSaveColor(){
     renderSavedColor()
 
 }
+
+
 
 function renderSavedColor(){
 
@@ -205,11 +218,12 @@ function renderSavedColor(){
 
             <div class='save-color-mode'>
                 ${mode}
+                <button class = 'del-save-btn' id='del-save-btn' data-palette-id=${id}>
+                    X
+                </button>
             </div>
+
             
-            <button class = 'del-save-btn'>
-                DEL
-            </button>
 
             <div style="background-color: ${paletteArr[0]}" data-save-color-id=${id}
                 class='color-palette'>${paletteArr[0]}</div>
