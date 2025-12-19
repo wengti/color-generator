@@ -1,10 +1,12 @@
 
-copy text in rgb and hsl
-
-button hover /click effect
-
 link to read more about these color schemes
 
 vertical display for wider screen
+- color bar become straight
+- menu bar changes
+
+save color (up to 10)
 
 make it into a extension on chrome
+
+check if can download from other device and make it work?

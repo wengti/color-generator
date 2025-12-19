@@ -1,5 +1,7 @@
 import convert from 'color-convert'
 
+console.log('hi')
+
 const colorForm = document.getElementById('color-form')
 const colorImgContainerArr = document.querySelectorAll('.color-img-container')
 const colorLabelArr = document.querySelectorAll('.color-label')
