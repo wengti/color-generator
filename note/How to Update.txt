@@ -1,0 +1,16 @@
+// Install vite
+npm install -D vite
+
+// Load vite into a port
+npx vite --port 5500
+
+
+// How to deploy with vite as a static site
+https://vite.dev/guide/static-deploy
+
+
+// How to update website
+git push -> to update git hub repo -> to update website
+
+// To update extension
+npm run build:extension    # Uses extension recipe → makes dist/
