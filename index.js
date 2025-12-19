@@ -1,3 +1,5 @@
+import convert from 'color-convert'
+
 const colorForm = document.getElementById('color-form')
 const colorImgContainerArr = document.querySelectorAll('.color-img-container')
 const colorLabelArr = document.querySelectorAll('.color-label')
@@ -7,9 +9,11 @@ const colorContainer = document.getElementById('color-container')
 const colorLabelContainerArr = Array.from(document.getElementsByClassName('color-label-container'))
 const dropDown = document.querySelector('select')
 const hexInput = document.getElementById('hex-input')
+const rgbInput = document.getElementById('rgb-input')
+const hslInput = document.getElementById('hsl-input')
 const statusMsg = document.getElementById('status-msg')
 
-let colorHexArr = []
+let colorValArr = []
 
 // Check user's prefer mode is dark or not
 let darkModeFlag = ''
@@ -24,7 +28,8 @@ colorForm.addEventListener('submit', function(event){
 
     const colorHex = getColorFromPicker()[0]
     const colorMode = getColorFromPicker()[1]
-    fetchAndRenderColor(colorHex, colorMode)
+    const colorFormat = getColorFromPicker()[2]
+    fetchAndRenderColor(colorHex, colorMode, colorFormat)
 })
 
 window.addEventListener('resize', function(event){
@@ -35,15 +40,31 @@ inputColor.addEventListener('change', function(){
     handleInputColorChange()
 })
 
-hexInput.addEventListener('keypress', function(event){
-    if (event.key === 'Enter'){
-        handleTextInputChange()
-    }
+document.addEventListener('keypress', function(event){
+    if (event.key === 'Enter')
+        
+        if(event.target.id === 'hex-input'){
+            convertHexToOther()
+        }
+        else if(event.target.id === 'rgb-input'){
+            convertRgbToOther()
+             
+        }
+        else if(event.target.id === 'hsl-input'){
+            convertHslToOther() 
+        }
+    handleTextInputChange()
 })
 
 document.addEventListener('click', function(event){
     if(event.target.dataset.colorId){
         handleCopyText(event.target.dataset.colorId)
+    }
+})
+
+document.addEventListener('dblclick', function(event){
+    if (event.target.dataset.dblclick){
+        handleCopyInputText(event.target)
     }
 })
 
@@ -55,8 +76,54 @@ randomFetchAndRender()
 
 
 
+function getNumberFromText(inputText){
+    const tempArr = []
+    let tempStr = ''
+    for (let letter of inputText){
 
+        if (!isNaN(letter)){
+            tempStr += letter
+            console.log('tempStr: ' + tempStr)
+        }
 
+        if (letter === ','){
+            tempArr.push(Number(tempStr))
+            tempStr = ''
+        }
+    }
+    tempArr.push(tempStr)
+
+    return tempArr
+
+}
+
+function convertHexToOther(){
+    const rgbArr = convert.hex.rgb(hexInput.value.slice(1))
+    rgbInput.value = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`
+
+    const hslArr = convert.hex.hsl(hexInput.value.slice(1))
+    hslInput.value = `hsl(${hslArr[0]}, ${hslArr[1]}%, ${hslArr[2]}%)`
+}
+
+function convertRgbToOther(){
+    const numArr = getNumberFromText(rgbInput.value)
+
+    const hexStr = convert.rgb.hex(numArr)
+    hexInput.value = `#${hexStr}`
+
+    const hslArr = convert.rgb.hsl(numArr)
+    hslInput.value = `hsl(${hslArr[0]}, ${hslArr[1]}%, ${hslArr[2]}%)`    
+}
+
+function convertHslToOther(){
+    const numArr = getNumberFromText(hslInput.value)
+
+    const hexStr = convert.hsl.hex(numArr)
+    hexInput.value = `#${hexStr}`
+
+    const rgbArr = convert.hsl.rgb(numArr)
+    rgbInput.value = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`    
+}
 
 
 
@@ -64,25 +131,26 @@ function handleInputColorChange(){
     hexInput.value = inputColor.value
 }
 
-function getColorFromPicker(){
-    const colorFormData = new FormData(colorForm)
-    const colorHex = colorFormData.get('input-color').slice(1) //#000000
-    const colorMode = colorFormData.get('drop-down') //monochrome
 
-    return [colorHex, colorMode]
-}
 
 function handleTextInputChange(){
     inputColor.value = hexInput.value 
 
     const colorHex = getColorFromPicker()[0]
     const colorMode = getColorFromPicker()[1]
+    const colorFormat = getColorFromPicker()[2]
 
-    fetchAndRenderColor(colorHex, colorMode)
+    fetchAndRenderColor(colorHex, colorMode, colorFormat)
 }
 
 function handleCopyText(colorId){
-    navigator.clipboard.writeText(colorHexArr[Number(colorId)-1])
+    navigator.clipboard.writeText(colorValArr[Number(colorId)-1])
+    statusMsg.textContent = 'Color copied!'
+}
+
+function handleCopyInputText(elem){
+    elem.select()
+    navigator.clipboard.writeText(elem.value)
     statusMsg.textContent = 'Color copied!'
 }
 
@@ -172,6 +240,15 @@ function handleDarkModeSwitch(toggle=true) {
     }
 }
 
+function getColorFromPicker(){
+    const colorFormData = new FormData(colorForm)
+    const colorHex = colorFormData.get('input-color').slice(1) //#000000
+    const colorMode = colorFormData.get('drop-down') //monochrome
+    const colorFormat = colorFormData.get('color-format') //hex, rgb, hsl
+
+    return [colorHex, colorMode, colorFormat]
+}
+
 function randomFetchAndRender(){
     // Generate a random hex number
     let randColorHex = (Math.floor(Math.random() * 16**6)).toString(16)
@@ -180,6 +257,8 @@ function randomFetchAndRender(){
     }
     inputColor.value = '#' + randColorHex // Assign to the color input
 
+    handleInputColorChange()
+    convertHexToOther()
     
 
     //Generate a random color Mode
@@ -195,25 +274,44 @@ function randomFetchAndRender(){
     
 }
 
-function fetchAndRenderColor(colorHex, colorMode){
+
+
+function fetchAndRenderColor(colorHex, colorMode, colorFormat='hex'){
     const api = `https://www.thecolorapi.com/scheme?hex=${colorHex}&mode=${colorMode}&count=5`
     statusMsg.textContent = 'Getting color...'
 
     fetch(api)
         .then(res => res.json())
         .then(data => {
-            renderColor(data)
+            renderColor(data, colorFormat)
         })
 }
 
-function renderColor(data) {
+function renderColor(data, colorFormat='hex') {
 
-    colorHexArr = []
+    colorValArr = []
 
     for (let i=0; i<data.colors.length; i++){
         colorImgContainerArr[i].src = data.colors[i].image.bare
-        colorLabelArr[i].textContent = data.colors[i].hex.value
-        colorHexArr.push(data.colors[i].hex.value)
+        
+        switch(colorFormat){
+            default:
+            case 'hex':
+                colorLabelArr[i].textContent = data.colors[i].hex.value
+                colorValArr.push(data.colors[i].hex.value)
+                break
+            
+            case 'rgb':
+                colorLabelArr[i].textContent = data.colors[i].rgb.value
+                colorValArr.push(data.colors[i].rgb.value)
+                break
+            
+            case 'hsl':
+                colorLabelArr[i].textContent = data.colors[i].hsl.value
+                colorValArr.push(data.colors[i].hsl.value)
+                break
+        }
+        
     }
 
     handleInputColorChange()
