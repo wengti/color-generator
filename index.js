@@ -13,12 +13,28 @@ const hexInput = document.getElementById('hex-input')
 const rgbInput = document.getElementById('rgb-input')
 const hslInput = document.getElementById('hsl-input')
 const statusMsg = document.getElementById('status-msg')
+const colorBtn = document.getElementById('color-btn')
 let colorValArr = []
 
 
+const onBgStyle = '#43E08F'
+colorBtn.addEventListener('mouseenter', function(event){
+    handleBtnHint(onBgStyle)
+})
+
+const offBgStyle = ''
+colorBtn.addEventListener('mouseleave', function(event){
+    handleBtnHint(offBgStyle)
+})
+
+function handleBtnHint(bgStyle){
+    colorBtn.style.backgroundColor = bgStyle;
+    inputColor.style.backgroundColor = bgStyle;
+}
+
 
 inputColor.addEventListener('change', function(){
-    console.log('hi')
+    handleInputColorChange()
 })
 
 document.addEventListener('keypress', function(event){
@@ -35,7 +51,6 @@ document.addEventListener('keypress', function(event){
         else if(event.target.id === 'hsl-input'){
             convertHslToOther() 
         }
-
         const changeFromText = true
         handleInputChange(changeFromText)
     }     
@@ -82,7 +97,6 @@ handleDarkModeSwitch(toggleDarkModeFlag)
 
 // Fetch data from API for a random color
 randomFetchAndRender()
-
 
 function getNumberFromText(inputText){
     const tempArr = []
@@ -131,6 +145,10 @@ function convertHslToOther(){
     rgbInput.value = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`    
 }
 
+function handleInputColorChange(){
+    hexInput.value = inputColor.value
+    convertHexToOther()
+}
 
 
 function handleInputChange(changeFromText=true){
