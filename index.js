@@ -1,6 +1,10 @@
 import convert from 'color-convert'
 import { v4 as uuidv4 } from 'uuid'
 
+let saveColorArr = []
+if (localStorage.getItem('saveColorArr')){
+    saveColorArr = JSON.parse(localStorage.getItem('saveColorArr'))
+}
 
 const colorForm = document.getElementById('color-form')
 const colorImgContainerArr = document.querySelectorAll('.color-img-container')
@@ -21,7 +25,7 @@ const saveColorContainer = document.getElementById('save-color-container')
 const saveStatusMsg = document.getElementById('save-status-message')
 
 
-let saveColorArr = []
+
 
 let colorValArr = []
 
@@ -128,10 +132,15 @@ handleWindowSizeChange()
 
 // dont change the flag, just change appearance as light / dark
 const toggleDarkModeFlag = false
-handleDarkModeSwitch(toggleDarkModeFlag) 
+handleDarkModeSwitch(toggleDarkModeFlag)
 
 // Fetch data from API for a random color
 randomFetchAndRender()
+
+// Render previous save result if ther's any
+if (saveColorArr.length){
+    renderSavedColor()
+}
 
 
 
@@ -139,6 +148,10 @@ randomFetchAndRender()
 function deleteSavedColor(paletteId){
     const selectedPaletteIdx = saveColorArr.findIndex(elem => elem.id === paletteId)
     saveColorArr.splice(selectedPaletteIdx, 1)
+
+    // save (changes) to local storage
+    localStorage.setItem('saveColorArr', JSON.stringify(saveColorArr))
+
     renderSavedColor()
 }
 
@@ -166,6 +179,9 @@ async function handleSaveColor(){
 
 
     statusMsg.textContent = 'Colors saved!'
+
+    // save to local storage
+    localStorage.setItem('saveColorArr', JSON.stringify(saveColorArr))
 
     // Show the saved color table
     renderSavedColor()
