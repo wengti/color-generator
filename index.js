@@ -296,7 +296,9 @@ function handleDarkModeSwitch(toggle=true) {
         })
         dropDown.classList.add('dark-form')
     
-        document.getElementById('reference-link').classList.add('dark-text')
+        Array.from(document.getElementsByClassName('reference-link')).forEach(elem => {
+            elem.classList.add('dark-text')
+        })
 
         dropDown.classList.add('dark-form')
         
@@ -318,7 +320,9 @@ function handleDarkModeSwitch(toggle=true) {
         })
         dropDown.classList.remove('dark-form')
 
-        document.getElementById('reference-link').classList.remove('dark-text')
+        Array.from(document.getElementsByClassName('reference-link')).forEach(elem => {
+            elem.classList.remove('dark-text')
+        })
 
         
         

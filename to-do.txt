@@ -1,6 +1,4 @@
 
-link to read more about these color schemes
-
 vertical display for wider screen
 - color bar become straight
 - menu bar changes

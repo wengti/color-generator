@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Roboto, sans-serif;
-    background-color: whitesmoke;
+    background-color: #f7eded;
     color: black;
 }
 
@@ -10,13 +10,13 @@ body {
     box-sizing: border-box;
 }
 
-h1 {
+h1, p {
     margin: 0;
     
 }
 
 /* General Layout */
-header {
+header, footer {
     border-bottom: 1px solid black;
     background: radial-gradient(circle,rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
     color: black;
@@ -217,6 +217,8 @@ input:checked + .slider:before {
     padding-left: 0; /* Override container */
     padding-right: 0; /* Override container */
     margin-bottom: 1em;
+    border: 2px solid gray;
+    
 }
 
 .color-grid-cell {
@@ -230,6 +232,7 @@ input:checked + .slider:before {
 .color-label-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     border: 1px solid black
 }
 
@@ -244,12 +247,21 @@ input:checked + .slider:before {
 .reference-container{
     text-align: center;
     margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 .reference-link{
     color: black;
 }
 
+/* Footer */
+.footer-container{
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
 
 
 /* Responsive Design */
@@ -257,6 +269,33 @@ input:checked + .slider:before {
     .radio-container{
         font-size: 1rem;
     }
+}
+
+@media (min-width: 768px){
+    .color-container {
+        grid-template-rows: 1fr 2rem;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-flow: column;
+        height: 55vh;
+        max-width: 800px; /*Override container*/
+    }
+
+    .color-img-container {
+        width: auto;
+        height: 100%;
+    }
+
+    .color-label {
+        writing-mode: horizontal-tb;
+        text-orientation: upright;
+    }
+
+    .reference-container{
+        flex-direction: row;
+        gap: 2em;
+    }
+
+
 }
 
 
