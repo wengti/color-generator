@@ -2,6 +2,8 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  // Your normal Vite config for the website
-  base: './' // or whatever base you were using
+  base: './',
+  build: {
+    outDir: 'dist-website'  // Output to a different folder
+  }
 })

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>A color palette generator</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+
+        <!-- Roboto Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" 
+         crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <script type="module" crossorigin src="./assets/index-DCmEOqMM.js"></script>
+      <link rel="stylesheet" crossorigin href="./assets/index-CIhRowwb.css">
+    </head>
+
+    <body>
+        <header>
+            <div class='container header-container'>
+                <h1>Color Palette Generator</h1>
+            </div>
+        </header>
+
+        <main>
+            
+            
+
+            <form class='container color-form' id='color-form'>
+                <div class='container status-container' id='status-msg'>Hit Enter or Get Color to start!</div>
+
+                <div class='switch-grid' id='switch-grid'>
+                    <label class="switch" id='switch'>
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <input type='color' name='input-color' class='input-color'/>
+
+                <select name='drop-down' class='drop-down'>
+                    <option value='monochrome' class='drop-down-option'>monochrome</option>
+                    <option value='monochrome-dark' class='drop-down-option'>monochrome-dark</option>
+                    <option value='monochrome-light' class='drop-down-option'>monochrome-light</option>
+                    <option value='analogic' class='drop-down-option'>analogic</option>
+                    <option value='complement' class='drop-down-option'>complement</option>
+                    <option value='analogic-complement' class='drop-down-option'>analogic-complement</option>
+                    <option value='triad' class='drop-down-option'>triad</option>
+                    <option value='quad' class='drop-down-option'>quad</option>
+                </select>
+
+                
+                <input type='text' class='rgb-input color-value-input' 
+                    id='rgb-input' placeholder='rgb value'
+                    pattern = 'rgb\(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]),\s([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]),\s([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\)'
+                    data-dblclick='true'/>
+                
+                <input type='text' class='hsl-input color-value-input' 
+                id='hsl-input' placeholder='hsl value'
+                pattern = 'hsl\(([0-9]|[1-9][0-9]|[1-2][0-9][0-9]|3[0-5][0-9]),\s([0-9]|[1-9][0-9]|100)%,\s([0-9]|[1-9][0-9]|100)%\)' 
+                data-dblclick='true'/>
+                
+
+                <input type='text' class='hex-input color-value-input' 
+                    id='hex-input' placeholder='hex value'
+                    pattern = '^#[0-9A-Fa-f]{6}$' 
+                    data-dblclick='true'/>
+                
+                
+                <div class='radio-container'>
+                    <input type='radio' class='radio-option' id='hex' name='color-format' value='hex' checked>
+                    <label for='hex'>HEX</label>
+
+                    <input type='radio' class='radio-option' id='rgb' name='color-format' value='rgb'>
+                    <label for='rgb'>RGB</label>
+
+                    <input type='radio' class='radio-option' id='hsl' name='color-format' value='hsl'>
+                    <label for='hsl'>HSL</label>
+                </div>
+                
+                
+
+                <input type='submit' value='Get Color' 
+                class='btn color-btn' id='color-btn'
+                title='Get color from color-picker'/>
+
+                <button type='button'
+                    class='btn save-btn' id='save-btn'>Save Color</button>
+            </form>
+
+            <div class='container color-container' id='color-container'>
+                <div class ='color-img-container' id='color-1'
+                    data-color-id='1'>
+                </div>
+                <div class='color-label-container' >
+                    <label for='color-1' class='color-label'
+                    data-color-id='1'></label>
+                </div>
+
+                <div class ='color-img-container' id='color-2'
+                    data-color-id='2'>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-2' class='color-label'
+                    data-color-id='2'></label>
+                </div>
+                
+                <div class ='color-img-container' id='color-3'
+                    data-color-id='3'>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-3' class='color-label'
+                    data-color-id='3'></label>
+                </div>
+
+                <div class ='color-img-container' id='color-4'
+                    data-color-id='4'>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-4' class='color-label'
+                    data-color-id='4'></label>
+                </div>
+
+                <div class ='color-img-container' id='color-5'
+                    data-color-id='5'>
+                </div>
+                <div class='color-label-container'>
+                    <label for='color-5' class='color-label'
+                    data-color-id='5'></label>
+                </div>
+            </div>
+
+            <!-- Saved Color -->
+            <hr>
+            <div class='container save-title-container'>
+                Saved Colors
+            </div>
+
+            <div class='container save-status-message' id='save-status-message'>
+                Choose render format
+            </div>
+
+            <div class='container save-radio-container'>
+
+                <div>
+                    <input type='radio' class='radio-option' id='save-hex' name='save-color-format' value='hex' checked>
+                    <label for='hex'>HEX</label>
+                </div>
+
+                <div>
+                    <input type='radio' class='radio-option' id='save-rgb' name='save-color-format' value='rgb'>
+                    <label for='rgb'>RGB</label>
+                </div>
+
+                <div>
+                    <input type='radio' class='radio-option' id='save-hsl' name='save-color-format' value='hsl'>
+                    <label for='hsl'>HSL</label>
+                </div>
+
+                <button class='btn' id='render-save-color-btn'>Render</button>
+            </div>
+
+            <div class='container' id='save-color-container'>
+            </div>
+
+            <div class='container reference-container'>
+                <a href='https://github.com/wengti/color-generator'
+                    target='_blank' class='reference-link'>
+                    GitHub Page
+                </a>
+                <a href='https://www.worqx.com/color/combinations.htm'
+                    target='_blank' class='reference-link'>
+                    Read More About Color Combination
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <div class='container footer-container'>
+                Created by Weng Ti
+            </div>
+        </footer>
+    
+    </body>
+</html>
