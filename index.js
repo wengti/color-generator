@@ -117,7 +117,7 @@ handleDarkModeSwitch(toggleDarkModeFlag)
 randomFetchAndRender()
 
 
-function handleSaveColor(){
+async function handleSaveColor(){
 
     // Make it in hex format -> paletteArr in Hex -> Easier to be displayed
     hexRadio.checked = true
@@ -125,7 +125,7 @@ function handleSaveColor(){
     // Make sure all the colors are updated (important for case when
     // color picker is changed, but never send to fetch the result from API)
     const changeFromText = false
-    handleInputChange(changeFromText) // wait until the fetch is completed
+    await handleInputChange(changeFromText) // wait until the fetch is completed
 
     
     
@@ -251,7 +251,7 @@ function handleInputColorChange(){
 }
 
 
-function handleInputChange(changeFromText=true){
+async function handleInputChange(changeFromText=true){
 
     if (changeFromText){
         inputColor.value = hexInput.value 
@@ -264,7 +264,7 @@ function handleInputChange(changeFromText=true){
     const colorMode = getColorFromPicker()[1]
     const colorFormat = getColorFromPicker()[2]
 
-    fetchAndRenderColor(colorHex, colorMode, colorFormat)
+    return fetchAndRenderColor(colorHex, colorMode, colorFormat)
 }
 
 
@@ -304,18 +304,16 @@ function randomFetchAndRender(){
 }
 
 
-function fetchAndRenderColor(colorHex, colorMode, colorFormat='hex'){
+async function fetchAndRenderColor(colorHex, colorMode, colorFormat='hex'){
     const api = `https://www.thecolorapi.com/scheme?hex=${colorHex}&mode=${colorMode}&count=5`
     statusMsg.textContent = 'Getting color...'
 
     let fetchCompleteFlag = false // Crucial for saving color
 
-    fetch(api)
+    return fetch(api)
         .then(res => res.json())
         .then(data => {
             renderColor(data, colorFormat)
-            fetchCompleteFlag = true // let the save color know that it can save now
-            console.log(fetchCompleteFlag)
         })
 }
 
