@@ -260,6 +260,7 @@ input:checked + .slider:before {
 
 .save-color-mode{
     grid-column: span 2;
+    text-align: center;
 }
 
 .base-save-color{

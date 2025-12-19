@@ -150,6 +150,9 @@ async function handleSaveColor(){
 }
 
 function renderSavedColor(){
+
+    saveColorContainer.classList.add('save-color-container') 
+    
     let savedColorHtml = ''
 
     for (let colorObj of saveColorArr){
@@ -192,6 +195,7 @@ function renderSavedColor(){
     }
 
     saveColorContainer.innerHTML = savedColorHtml
+    
 
     console.log(savedColorHtml)
     console.log(saveColorArr)
