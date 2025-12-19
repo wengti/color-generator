@@ -1,11 +1,4 @@
 
-
-render saved color
-
-copy saved color
-
-copy in different color
-
 delete saved color
 
 localStorage to save and load the saved color

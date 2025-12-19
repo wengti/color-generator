@@ -18,8 +18,8 @@ const btnArr = Array.from(document.getElementsByClassName('btn'))
 const saveBtn = document.getElementById('save-btn')
 const hexRadio = document.getElementById('hex')
 const saveColorContainer = document.getElementById('save-color-container')
+const saveStatusMsg = document.getElementById('save-status-message')
 
-let fetchCompleteFlag = false
 
 let saveColorArr = []
 
@@ -33,7 +33,6 @@ saveBtn.addEventListener('click', handleSaveColor)
 const onBgStyle = '#43E08F'
 btnArr.forEach( elem => {
     elem.addEventListener('mouseenter', function(event){
-        
         handleBtnHint(this, onBgStyle)
     })
 })
@@ -90,20 +89,22 @@ document.addEventListener('click', function(event){
 
     let id = ''
     let saveColorFlag = false
-    let saveColorIdx = ''
+    let targetElem = ''
 
     if(event.target.dataset.colorId){
         id = event.target.dataset.colorId
         saveColorFlag = false
-        saveColorIdx = ''
-        handleCopyText(id, saveColorFlag, saveColorIdx)
+        targetElem = ''
+        handleCopyText(id, saveColorFlag, targetElem)
     } else if(event.target.dataset.saveColorId){
         id = event.target.dataset.saveColorId
         saveColorFlag = true
-        saveColorIdx = event.target.dataset.saveColorIdx
-        handleCopyText(id, saveColorFlag, saveColorIdx)
+        targetElem = event.target
+        handleCopyText(id, saveColorFlag, targetElem)
     }
-    
+    else if(event.target.id === 'render-save-color-btn'){
+        renderSavedColor()
+    }
 })
 
 document.addEventListener('dblclick', function(event){
@@ -164,50 +165,66 @@ function renderSavedColor(){
 
     saveColorContainer.classList.add('save-color-container') 
 
+    const renderFormat = document.querySelector("input[name='save-color-format']:checked").value
     let savedColorHtml = ''
 
     for (let colorObj of saveColorArr){
 
         let {hex, mode, paletteArr, id} = colorObj
+        
         mode = mode[0].toUpperCase() + mode.slice(1) // Capitalize the first letter
+        
+        let baseColorCode = hex
+        if (renderFormat === 'rgb'){
+            const baseRgbArr = convert.hex.rgb(baseColorCode.slice(1))
+            baseColorCode = `rgb(${baseRgbArr[0]}, ${baseRgbArr[1]}, ${baseRgbArr[2]})`
+
+            let tempPaletteArr = []
+            for (let palette of paletteArr){
+                const rgbArr = convert.hex.rgb(palette.slice(1))
+                tempPaletteArr.push(`rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`)
+                
+            }
+            paletteArr = tempPaletteArr
+        } else if (renderFormat === 'hsl'){
+            const baseHslArr = convert.hex.hsl(baseColorCode.slice(1))
+            baseColorCode = `hsl(${baseHslArr[0]}, ${baseHslArr[1]}%, ${baseHslArr[2]}%)`
+
+            let tempPaletteArr = []
+            for (let palette of paletteArr){
+                const hslArr = convert.hex.hsl(palette.slice(1))
+                tempPaletteArr.push(`hsl(${hslArr[0]}, ${hslArr[1]}%, ${hslArr[2]}%)`)
+                
+            }
+            paletteArr = tempPaletteArr
+        }
+
         savedColorHtml += `
+            <div style="background-color: ${baseColorCode}" data-save-color-id=${id}
+                class='base-save-color'>${baseColorCode}</div>
+
             <div class='save-color-mode'>
                 ${mode}
             </div>
-
-            <div style="background-color: ${hex}" data-save-color-id=${id}
-                class='base-save-color' data-save-color-idx='0'>
-                ${hex}
-            </div>
-
+            
             <button class = 'del-save-btn'>
                 DEL
             </button>
 
             <div style="background-color: ${paletteArr[0]}" data-save-color-id=${id}
-                class='color-palette' data-save-color-idx='1'>
-                ${paletteArr[0]}
-            </div>
+                class='color-palette'>${paletteArr[0]}</div>
 
             <div style="background-color: ${paletteArr[1]}" data-save-color-id=${id}
-                class='color-palette' data-save-color-idx='2'>
-                ${paletteArr[1]}
-            </div>
+                class='color-palette'>${paletteArr[1]}</div>
 
             <div style="background-color: ${paletteArr[2]}" data-save-color-id=${id}
-                class='color-palette' data-save-color-idx='3'>
-                ${paletteArr[2]}
-            </div>
+                class='color-palette'>${paletteArr[2]}</div>
 
             <div style="background-color: ${paletteArr[3]}" data-save-color-id=${id}
-                class='color-palette' data-save-color-idx='4'>
-                ${paletteArr[3]}
-            </div>
+                class='color-palette'>${paletteArr[3]}</div>
 
             <div style="background-color: ${paletteArr[4]}" data-save-color-id=${id}
-                class='color-palette' data-save-color-idx='5'>
-                ${paletteArr[4]}
-            </div>
+                class='color-palette'>${paletteArr[4]}</div>
         `
     }
 
@@ -367,21 +384,15 @@ function renderColor(data, colorFormat='hex') {
 }
 
 // Copy //
-function handleCopyText(id, saveColorFlag=false, saveColorIdx=''){
+function handleCopyText(id, saveColorFlag=false, elem=''){
     if(!saveColorFlag){
         navigator.clipboard.writeText(colorValArr[Number(id)-1])
+        statusMsg.textContent = 'Color copied!'
     } else{
-        const selectedColor = saveColorArr.filter(elem => elem.id === id)[0]
-        saveColorIdx = Number(saveColorIdx)
-        //Not 0
-        if(saveColorIdx){
-            navigator.clipboard.writeText(selectedColor.paletteArr[saveColorIdx-1])
-        } else {
-            navigator.clipboard.writeText(selectedColor.hex)
-        }
-
+        navigator.clipboard.writeText(elem.textContent)
+        saveStatusMsg.textContent = 'Color copied!'
     }
-    statusMsg.textContent = 'Color copied!'
+    
 }
 
 function handleCopyInputText(elem){

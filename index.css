@@ -119,6 +119,7 @@ header, footer {
 
 .radio-option {
     margin: 0;
+    
 }
 
 .drop-down,
@@ -251,6 +252,20 @@ input:checked + .slider:before {
 /* SAVE COLOR CONTAINER */
 .save-title-container{
     text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.05em;
+}
+
+.save-status-message{
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.save-radio-container{
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .save-color-container{
@@ -260,15 +275,19 @@ input:checked + .slider:before {
     padding-left: 0; /* Override container */
     padding-right: 0; /* Override container */
     border: 1px solid gray;
+    margin-bottom: 1em;
 }
 
 .save-color-mode{
     grid-column: span 2;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .base-save-color{
     grid-column: span 2;
+    text-align: center;
 }
 
 .del-save-btn{
@@ -276,8 +295,9 @@ input:checked + .slider:before {
 }
 
 .color-palette {
-    height: 100px;
-
+    height: 150px;
+    writing-mode: vertical-lr;
+    text-orientation: sideways;
 }
 
 .base-save-color,
@@ -354,6 +374,8 @@ input:checked + .slider:before {
 
     .color-palette {
         height: 50px;
+        writing-mode: horizontal-tb;
+        text-orientation: upright;
     }
 
     .reference-container{
