@@ -247,6 +247,33 @@ input:checked + .slider:before {
     text-align: center;
 }
 
+
+/* SAVE COLOR CONTAINER */
+.save-color-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 95%;
+    padding-left: 0; /* Override container */
+    padding-right: 0; /* Override container */
+    border: 1px solid gray;
+}
+
+.save-color-mode{
+    grid-column: span 2;
+}
+
+.base-save-color{
+    grid-column: span 2;
+}
+
+.del-save-btn{
+    grid-column: span 1;
+}
+
+.color-palette {
+    height: 100px;
+}
+
 /* Reference Container */
 
 .reference-container{
@@ -290,12 +317,16 @@ input:checked + .slider:before {
             'clrb clrb clrb clrb clrb clrb savb savb savb savb savb savb';    
     }
 
+    .color-container,
+    .save-color-container {
+        max-width: 800px; /*Override container*/
+    }
+
     .color-container {
         grid-template-rows: 1fr 2rem;
         grid-template-columns: repeat(5, 1fr);
         grid-auto-flow: column;
         height: 55vh;
-        max-width: 800px; /*Override container*/
     }
 
     .color-img-container {

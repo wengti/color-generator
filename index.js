@@ -1,4 +1,5 @@
 import convert from 'color-convert'
+import { v4 as uuidv4 } from 'uuid'
 
 
 const colorForm = document.getElementById('color-form')
@@ -16,6 +17,9 @@ const statusMsg = document.getElementById('status-msg')
 const btnArr = Array.from(document.getElementsByClassName('btn'))
 const saveBtn = document.getElementById('save-btn')
 const hexRadio = document.getElementById('hex')
+const saveColorContainer = document.getElementById('save-color-container')
+
+let fetchCompleteFlag = false
 
 let saveColorArr = []
 
@@ -121,14 +125,19 @@ function handleSaveColor(){
     // Make sure all the colors are updated (important for case when
     // color picker is changed, but never send to fetch the result from API)
     const changeFromText = false
-    handleInputChange(changeFromText)
+    handleInputChange(changeFromText) // wait until the fetch is completed
+
+    
+    
 
     // Save the rendered result
     saveColorArr.unshift({
-        hex: getColorFromPicker()[0],
+        hex: '#' + getColorFromPicker()[0],
         mode: getColorFromPicker()[1],
-        paletteArr: colorValArr
+        paletteArr: colorValArr,
+        id: uuidv4()
     })
+
 
     // Allow saving up to 20 results
     if (saveColorArr.length > 20){
@@ -138,6 +147,54 @@ function handleSaveColor(){
     // Show the saved color table
     renderSavedColor()
 
+}
+
+function renderSavedColor(){
+    let savedColorHtml = ''
+
+    for (let colorObj of saveColorArr){
+
+        let {hex, mode, paletteArr, id} = colorObj
+        mode = mode[0].toUpperCase() + mode.slice(1) // Capitalize the first letter
+        savedColorHtml += `
+            <div class='save-color-mode'>
+                ${mode}
+            </div>
+
+            <div style="background-color: ${hex}" data-save-color-id=${id}
+                class='base-save-color'>
+            </div>
+
+            <button class = 'del-save-btn'>
+                DEL
+            </button>
+
+            <div style="background-color: ${paletteArr[0]}" data-save-color-id=${id}
+                class='color-palette'>
+            </div>
+
+            <div style="background-color: ${paletteArr[1]}" data-save-color-id=${id}
+                class='color-palette'>
+            </div>
+
+            <div style="background-color: ${paletteArr[2]}" data-save-color-id=${id}
+                class='color-palette'>
+            </div>
+
+            <div style="background-color: ${paletteArr[3]}" data-save-color-id=${id}
+                class='color-palette'>
+            </div>
+
+            <div style="background-color: ${paletteArr[4]}" data-save-color-id=${id}
+                class='color-palette'>
+            </div>
+        `
+    }
+
+    saveColorContainer.innerHTML = savedColorHtml
+
+    console.log(savedColorHtml)
+    console.log(saveColorArr)
 }
 
 
@@ -251,10 +308,14 @@ function fetchAndRenderColor(colorHex, colorMode, colorFormat='hex'){
     const api = `https://www.thecolorapi.com/scheme?hex=${colorHex}&mode=${colorMode}&count=5`
     statusMsg.textContent = 'Getting color...'
 
+    let fetchCompleteFlag = false // Crucial for saving color
+
     fetch(api)
         .then(res => res.json())
         .then(data => {
             renderColor(data, colorFormat)
+            fetchCompleteFlag = true // let the save color know that it can save now
+            console.log(fetchCompleteFlag)
         })
 }
 
