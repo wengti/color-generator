@@ -55,8 +55,8 @@ header, footer {
     gap: 0.2em;
     align-items: center;
     grid-template-areas: 
-        'swig swig swig stat stat stat stat stat stat stat stat stat'
-        'iclr iclr iclr iclr iclr iclr radi radi radi radi radi radi'
+        'stat stat stat stat stat stat stat stat stat stat stat stat'
+        'swig swig swig iclr iclr iclr iclr iclr radi radi radi radi'
         'hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi'
         'rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi'
         'hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli'
@@ -278,8 +278,8 @@ input:checked + .slider:before {
         grid-template-rows: repeat(5,1fr);
         gap: 0.4em;
         grid-template-areas: 
-            'swig swig swig stat stat stat stat stat stat stat stat stat'
-            'iclr iclr iclr iclr iclr iclr radi radi radi radi radi radi'
+            stat stat stat stat stat stat stat stat stat stat stat stat'
+        'swig swig swig iclr iclr iclr iclr iclr radi radi radi radi'
             'hexi hexi hexi hexi rgbi rgbi rgbi rgbi hsli hsli hsli hsli'
             'drop drop drop drop drop drop drop drop drop drop drop drop'
             'clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb';    
