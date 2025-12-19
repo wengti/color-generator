@@ -61,7 +61,7 @@ header, footer {
         'rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi'
         'hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli'
         'drop drop drop drop drop drop drop drop drop drop drop drop'
-        'clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb';
+        'clrb clrb clrb clrb clrb clrb savb savb savb savb savb savb';
     
 }
 
@@ -84,6 +84,10 @@ header, footer {
 
 .color-btn {
     grid-area: clrb;
+}
+
+.save-btn {
+    grid-area: savb;
 }
 
 .color-value-input{
@@ -287,7 +291,7 @@ input:checked + .slider:before {
             'swig swig swig iclr iclr iclr iclr iclr radi radi radi radi'
             'hexi hexi hexi hexi rgbi rgbi rgbi rgbi hsli hsli hsli hsli'
             'drop drop drop drop drop drop drop drop drop drop drop drop'
-            'clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb';    
+            'clrb clrb clrb clrb clrb clrb savb savb savb savb savb savb';    
     }
 
     .color-container {

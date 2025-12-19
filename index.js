@@ -13,22 +13,36 @@ const hexInput = document.getElementById('hex-input')
 const rgbInput = document.getElementById('rgb-input')
 const hslInput = document.getElementById('hsl-input')
 const statusMsg = document.getElementById('status-msg')
-const colorBtn = document.getElementById('color-btn')
+const btnArr = Array.from(document.getElementsByClassName('btn'))
+const saveBtn = document.getElementById('save-btn')
+const hexRadio = document.getElementById('hex')
+
+let saveColorArr = []
+
 let colorValArr = []
 
 
+
+saveBtn.addEventListener('click', handleSaveColor)
+
+
 const onBgStyle = '#43E08F'
-colorBtn.addEventListener('mouseenter', function(event){
-    handleBtnHint(onBgStyle)
+btnArr.forEach( elem => {
+    elem.addEventListener('mouseenter', function(event){
+        
+        handleBtnHint(this, onBgStyle)
+    })
 })
 
 const offBgStyle = ''
-colorBtn.addEventListener('mouseleave', function(event){
-    handleBtnHint(offBgStyle)
+btnArr.forEach( elem => {
+    elem.addEventListener('mouseleave', function(event){
+        handleBtnHint(this, offBgStyle)
+    })
 })
 
-function handleBtnHint(bgStyle){
-    colorBtn.style.backgroundColor = bgStyle;
+function handleBtnHint(elem, bgStyle){
+    elem.style.backgroundColor = bgStyle;
     inputColor.style.backgroundColor = bgStyle;
 }
 
@@ -97,6 +111,35 @@ handleDarkModeSwitch(toggleDarkModeFlag)
 
 // Fetch data from API for a random color
 randomFetchAndRender()
+
+
+function handleSaveColor(){
+
+    // Make it in hex format -> paletteArr in Hex -> Easier to be displayed
+    hexRadio.checked = true
+
+    // Make sure all the colors are updated (important for case when
+    // color picker is changed, but never send to fetch the result from API)
+    const changeFromText = false
+    handleInputChange(changeFromText)
+
+    // Save the rendered result
+    saveColorArr.unshift({
+        hex: getColorFromPicker()[0],
+        mode: getColorFromPicker()[1],
+        paletteArr: colorValArr
+    })
+
+    // Allow saving up to 20 results
+    if (saveColorArr.length > 20){
+        saveColorArr.pop()
+    }
+
+    // Show the saved color table
+    renderSavedColor()
+
+}
+
 
 function getNumberFromText(inputText){
     const tempArr = []
@@ -313,7 +356,10 @@ function handleDarkModeSwitch(toggle=true) {
             elem.classList.add('dark-form')
         })
 
-        colorBtn.classList.add('dark-selectable')
+        btnArr.forEach(elem=>{
+            elem.classList.add('dark-selectable')
+        })
+
         dropDown.classList.add('dark-selectable')
     
         Array.from(document.getElementsByClassName('reference-link')).forEach(elem => {
@@ -338,7 +384,10 @@ function handleDarkModeSwitch(toggle=true) {
         document.querySelectorAll('input').forEach( elem => {
             elem.classList.remove('dark-form')
         })
-        colorBtn.classList.remove('dark-selectable')
+
+        btnArr.forEach(elem=>{
+            elem.classList.remove('dark-selectable')
+        })
         dropDown.classList.remove('dark-selectable')
 
         Array.from(document.getElementsByClassName('reference-link')).forEach(elem => {
