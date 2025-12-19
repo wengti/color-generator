@@ -56,7 +56,7 @@ header, footer {
     align-items: center;
     grid-template-areas: 
         'stat stat stat stat stat stat stat stat stat stat stat stat'
-        'swig swig swig iclr iclr iclr iclr iclr radi radi radi radi'
+        'swig swig swig iclr iclr iclr iclr radi radi radi radi radi'
         'hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi hexi'
         'rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi rgbi'
         'hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli hsli'
@@ -217,7 +217,7 @@ input:checked + .slider:before {
     display: grid;
     grid-template-columns: 1fr 2rem;
     grid-template-rows: repeat(5, 1fr);
-    height: 100vh;
+    height: 85vh;
     width: 95%;
     padding-left: 0; /* Override container */
     padding-right: 0; /* Override container */
@@ -270,7 +270,7 @@ input:checked + .slider:before {
 
 
 /* Responsive Design */
-@media (min-width: 400px){
+@media (min-width: 480px){
     .radio-container{
         font-size: 1rem;
     }
@@ -283,8 +283,8 @@ input:checked + .slider:before {
         grid-template-rows: repeat(5,1fr);
         gap: 0.4em;
         grid-template-areas: 
-            stat stat stat stat stat stat stat stat stat stat stat stat'
-        'swig swig swig iclr iclr iclr iclr iclr radi radi radi radi'
+            'stat stat stat stat stat stat stat stat stat stat stat stat'
+            'swig swig swig iclr iclr iclr iclr iclr radi radi radi radi'
             'hexi hexi hexi hexi rgbi rgbi rgbi rgbi hsli hsli hsli hsli'
             'drop drop drop drop drop drop drop drop drop drop drop drop'
             'clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb clrb';    

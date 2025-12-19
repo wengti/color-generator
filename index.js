@@ -243,7 +243,7 @@ function renderColor(data, colorFormat='hex') {
     }
 
     hexInput.value = inputColor.value
-    statusMsg.textContent = 'Hit Enter or Click Get Color to start!'
+    statusMsg.textContent = 'Hit Enter or Get Color to start!'
 }
 
 // Copy //
