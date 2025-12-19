@@ -25,9 +25,18 @@
 
         <main>
             
-            <div class='container status-container' id='status-msg'>Get color to start!</div>
+            
 
             <form class='container color-form' id='color-form'>
+                <div class='container status-container' id='status-msg'>Get color to start!</div>
+
+                <div class='switch-grid' id='switch-grid'>
+                    <label class="switch" id='switch'>
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
                 <input type='color' name='input-color' class='input-color'/>
 
                 <select name='drop-down' class='drop-down'>
@@ -41,16 +50,27 @@
                     <option value='quad' class='drop-down-option'>quad</option>
                 </select>
 
-                <input type='text' class='hex-input' 
-                    id='hex-input' placeholder='hex value'/
-                    pattern = '^#[0-9A-Fa-f]{6}$'>
                 
-                <div class='switch-grid' id='switch-grid'>
-                    <label class="switch" id='switch'>
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
+                
+                
+
+                <input type='text' class='hex-input' 
+                    id='hex-input' placeholder='hex value'
+                    pattern = '^#[0-9A-Fa-f]{6}$' />
+                
+                
+                <div class='radio-container'>
+                    <input type='radio' class='radio-option' id='hex' name='hex' value='hex'>
+                    <label>HEX</label>
+
+                    <input type='radio' class='radio-option' id='rgb' name='hex' value='hex'>
+                    <label>RGB</label>
+
+                    <input type='radio' class='radio-option' id='hsl' name='hex' value='hex'>
+                    <label>HSL</label>
                 </div>
+                
+                
 
                 <input type='submit' value='Get Color' class='btn color-btn'/>
             </form>
