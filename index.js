@@ -312,13 +312,15 @@ function handleDarkModeSwitch(toggle=true) {
         document.querySelectorAll('input').forEach( elem => {
             elem.classList.add('dark-form')
         })
-        dropDown.classList.add('dark-form')
+
+        colorBtn.classList.add('dark-selectable')
+        dropDown.classList.add('dark-selectable')
     
         Array.from(document.getElementsByClassName('reference-link')).forEach(elem => {
             elem.classList.add('dark-text')
         })
 
-        dropDown.classList.add('dark-form')
+        
         
         colorContainer.classList.add('dark-color-container')
         colorLabelContainerArr.forEach( 
@@ -336,14 +338,14 @@ function handleDarkModeSwitch(toggle=true) {
         document.querySelectorAll('input').forEach( elem => {
             elem.classList.remove('dark-form')
         })
-        dropDown.classList.remove('dark-form')
+        colorBtn.classList.remove('dark-selectable')
+        dropDown.classList.remove('dark-selectable')
 
         Array.from(document.getElementsByClassName('reference-link')).forEach(elem => {
             elem.classList.remove('dark-text')
         })
 
-        
-        
+            
         colorContainer.classList.remove('dark-color-container')
         colorLabelContainerArr.forEach( 
             elem => elem.classList.remove('dark-color-label-container'))

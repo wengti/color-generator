@@ -118,6 +118,11 @@ header, footer {
 }
 
 .drop-down,
+.btn {
+    background-color: #D1E6E6;
+}
+
+.drop-down,
 .btn,
 .color-value-input{
     border-radius: 5px;
@@ -313,17 +318,20 @@ input:checked + .slider:before {
 
 
 /* Dark Mode  Utility Class*/
-.dark-body,
-.dark-form{
-    color: white;
-}
 
 .dark-body {
+    color: white;
     background-color: #282828;
 }
 
 .dark-form{
+    color: white;
     background-color: #666666;
+}
+
+.dark-selectable {
+    color: white;
+    background-color: #3D3232;
 }
 
 .dark-color-container{
