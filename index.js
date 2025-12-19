@@ -152,7 +152,7 @@ async function handleSaveColor(){
 function renderSavedColor(){
 
     saveColorContainer.classList.add('save-color-container') 
-    
+
     let savedColorHtml = ''
 
     for (let colorObj of saveColorArr){
@@ -166,6 +166,7 @@ function renderSavedColor(){
 
             <div style="background-color: ${hex}" data-save-color-id=${id}
                 class='base-save-color'>
+                ${hex}
             </div>
 
             <button class = 'del-save-btn'>
@@ -174,22 +175,27 @@ function renderSavedColor(){
 
             <div style="background-color: ${paletteArr[0]}" data-save-color-id=${id}
                 class='color-palette'>
+                ${paletteArr[0]}
             </div>
 
             <div style="background-color: ${paletteArr[1]}" data-save-color-id=${id}
                 class='color-palette'>
+                ${paletteArr[1]}
             </div>
 
             <div style="background-color: ${paletteArr[2]}" data-save-color-id=${id}
                 class='color-palette'>
+                ${paletteArr[2]}
             </div>
 
             <div style="background-color: ${paletteArr[3]}" data-save-color-id=${id}
                 class='color-palette'>
+                ${paletteArr[3]}
             </div>
 
             <div style="background-color: ${paletteArr[4]}" data-save-color-id=${id}
                 class='color-palette'>
+                ${paletteArr[4]}
             </div>
         `
     }

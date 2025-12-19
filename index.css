@@ -265,6 +265,7 @@ input:checked + .slider:before {
 
 .base-save-color{
     grid-column: span 2;
+    text-align: center;
 }
 
 .del-save-btn{
@@ -273,6 +274,9 @@ input:checked + .slider:before {
 
 .color-palette {
     height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Reference Container */
@@ -338,6 +342,10 @@ input:checked + .slider:before {
     .color-label {
         writing-mode: horizontal-tb;
         text-orientation: upright;
+    }
+
+    .color-palette {
+        height: 50px;
     }
 
     .reference-container{
