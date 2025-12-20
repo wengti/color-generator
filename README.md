@@ -25,7 +25,7 @@ An extension (or an webpage) that is built upon the [colorAPI](https://www.theco
         - For more details, it can be referred to this [visual summary](https://www.worqx.com/color/combinations.htm).
 
 <div align='center'>
-    <img src='./images/edit-demo/menu.png' alt='The menu for generating color' width='30%'/>
+    <img src='./images/edit-demo/menu.png' alt='The menu for generating color' width='50%'/>
 </div>
 
 * Save the generated color palette along its base color with the color mode.
@@ -35,7 +35,7 @@ An extension (or an webpage) that is built upon the [colorAPI](https://www.theco
     - The saved color can be deleted by ***Double clicking the red 'X' button***.
 
 <div align='center'>
-    <img src='./images/demo/save-color.png' alt='The display of the saved color of a user' width='30%'/>
+    <img src='./images/demo/save-color.png' alt='The display of the saved color of a user' width='50%'/>
 </div>
 
 * Copy Color Code
@@ -43,7 +43,7 @@ An extension (or an webpage) that is built upon the [colorAPI](https://www.theco
     - The text input area for the HEX, RGB and HSL can also be copied by ***double clicking the text input area***.
 
 <div align='center'>
-    <img src='./images/edit-demo/copy.png' alt='The overall snapshot of the website' width='30%'/>
+    <img src='./images/edit-demo/copy.png' alt='The overall snapshot of the website' width='50%'/>
 </div>
 
 * Dark Mode
@@ -51,8 +51,8 @@ An extension (or an webpage) that is built upon the [colorAPI](https://www.theco
     - The 2 modes can then be toggled using the slider.
 
 <div align='center'>
-    <img src='./images/edit-demo/get-color.png' alt='The website in dark mode' width='30%'/>
-    <img src='./images/edit-demo/get-color-light.png' alt='The website in light mode' width='30%'/>
+    <img src='./images/edit-demo/get-color.png' alt='The website in dark mode' width='50%'/>
+    <img src='./images/edit-demo/get-color-light.png' alt='The website in light mode' width='50%'/>
 </div>
 
 * The 'Get Color' and 'Save Color' buttons always generate color palette by referring to the color picker.
@@ -60,5 +60,5 @@ An extension (or an webpage) that is built upon the [colorAPI](https://www.theco
     - To remind the user of this, when these 2 buttons are hovered, the buttons and the color pickers will be lit with a green background color.
 
 <div align='center'>
-    <img src='./images/demo/hint.png' alt='The hint that shows up to remind user that the color in the color picker will be prioritizedl.' width='20%'/>
+    <img src='./images/demo/hint.png' alt='The hint that shows up to remind user that the color in the color picker will be prioritizedl.' width='50%'/>
 </div>
