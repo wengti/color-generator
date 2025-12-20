@@ -46,7 +46,7 @@ header, footer {
     grid-area: stat
 }
 
-/* Form */
+/* Menu form */
 .color-form {
     display: grid;
     padding-top: 0.4em;
@@ -72,26 +72,26 @@ header, footer {
     grid-area: iclr;
 }
 
-.drop-down{
-    border: 0;
-    grid-area: drop;
-    text-align: center;
+.radio-container {
+    grid-area: radi;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr;
+    justify-content: center;
+    text-align: left;
+    font-size: 0.75rem;
 }
 
-.btn {
-    background-color: white;
-    text-align: center;
+.radio-option {
+    margin: 0;
+    
 }
 
-.color-btn {
-    grid-area: clrb;
-}
 
 .save-btn {
     grid-area: savb;
 }
 
-.color-value-input{
+.color-value-input{       /* For HEX, RGB, HSL text input*/
     text-align: center;
 }
 
@@ -107,20 +107,19 @@ header, footer {
     grid-area: hexi;
 }
 
-
-
-.radio-container {
-    grid-area: radi;
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr;
-    justify-content: center;
-    text-align: left;
-    font-size: 0.75rem;
+.drop-down{
+    border: 0;
+    grid-area: drop;
+    text-align: center;
 }
 
-.radio-option {
-    margin: 0;
-    
+.btn {
+    background-color: white;
+    text-align: center;
+}
+
+.color-btn {
+    grid-area: clrb;
 }
 
 .drop-down,
@@ -209,6 +208,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
 
 /* Interact effect */
 .drop-down,
@@ -388,20 +388,22 @@ input:checked + .slider:before {
         text-orientation: upright;
     }
 
+    .save-color-mode{
+        font-size: 1rem;
+    }
+    
     .color-palette {
         height: 50px;
         writing-mode: horizontal-tb;
         text-orientation: upright;
     }
+    
 
     .reference-container{
         flex-direction: row;
         gap: 2em;
     }
 
-    .save-color-mode{
-        font-size: 1rem;
-    }
 
 
 }

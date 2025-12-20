@@ -17,6 +17,8 @@
     </head>
 
     <body>
+
+        <!-- Header -->
         <header>
             <div class='container header-container'>
                 <h1>Color Palette Generator</h1>
@@ -24,12 +26,13 @@
         </header>
 
         <main>
-            
-            
-
+            <!-- Menu Form -->
             <form class='container color-form' id='color-form'>
+
+                <!-- Status Message -->
                 <div class='container status-container' id='status-msg'>Hit Enter or Get Color to start!</div>
 
+                <!-- Toggle switch for dark mode -->
                 <div class='switch-grid' id='switch-grid'>
                     <label class="switch" id='switch'>
                         <input type="checkbox">
@@ -37,8 +40,41 @@
                     </label>
                 </div>
 
+                <!-- Input for color picker -->
                 <input type='color' name='input-color' class='input-color'/>
+                
+                <!-- Selection of color format to be rendered -->
+                <div class='radio-container'>
+                    <input type='radio' class='radio-option' id='hex' name='color-format' value='hex' checked>
+                    <label for='hex'>HEX</label>
 
+                    <input type='radio' class='radio-option' id='rgb' name='color-format' value='rgb'>
+                    <label for='rgb'>RGB</label>
+
+                    <input type='radio' class='radio-option' id='hsl' name='color-format' value='hsl'>
+                    <label for='hsl'>HSL</label>
+                </div>
+
+                
+                <!-- Text input for HEX value -->
+                <input type='text' class='hex-input color-value-input' 
+                id='hex-input' placeholder='hex value'
+                pattern = '^#[0-9A-Fa-f]{6}$' 
+                data-dblclick='true'/>
+                
+                <!-- Text input for RGB value -->
+                <input type='text' class='rgb-input color-value-input' 
+                id='rgb-input' placeholder='rgb value'
+                pattern = 'rgb\(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]),\s([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]),\s([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\)'
+                data-dblclick='true'/>
+                
+                <!-- Text input for HSL value -->
+                <input type='text' class='hsl-input color-value-input' 
+                id='hsl-input' placeholder='hsl value'
+                pattern = 'hsl\(([0-9]|[1-9][0-9]|[1-2][0-9][0-9]|3[0-5][0-9]),\s([0-9]|[1-9][0-9]|100)%,\s([0-9]|[1-9][0-9]|100)%\)' 
+                data-dblclick='true'/>
+                
+                <!-- Drop down to select color mode -->
                 <select name='drop-down' class='drop-down'>
                     <option value='monochrome' class='drop-down-option'>monochrome</option>
                     <option value='monochrome-dark' class='drop-down-option'>monochrome-dark</option>
@@ -50,46 +86,22 @@
                     <option value='quad' class='drop-down-option'>quad</option>
                 </select>
 
-                
-                <input type='text' class='rgb-input color-value-input' 
-                    id='rgb-input' placeholder='rgb value'
-                    pattern = 'rgb\(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]),\s([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]),\s([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\)'
-                    data-dblclick='true'/>
-                
-                <input type='text' class='hsl-input color-value-input' 
-                id='hsl-input' placeholder='hsl value'
-                pattern = 'hsl\(([0-9]|[1-9][0-9]|[1-2][0-9][0-9]|3[0-5][0-9]),\s([0-9]|[1-9][0-9]|100)%,\s([0-9]|[1-9][0-9]|100)%\)' 
-                data-dblclick='true'/>
-                
-
-                <input type='text' class='hex-input color-value-input' 
-                    id='hex-input' placeholder='hex value'
-                    pattern = '^#[0-9A-Fa-f]{6}$' 
-                    data-dblclick='true'/>
-                
-                
-                <div class='radio-container'>
-                    <input type='radio' class='radio-option' id='hex' name='color-format' value='hex' checked>
-                    <label for='hex'>HEX</label>
-
-                    <input type='radio' class='radio-option' id='rgb' name='color-format' value='rgb'>
-                    <label for='rgb'>RGB</label>
-
-                    <input type='radio' class='radio-option' id='hsl' name='color-format' value='hsl'>
-                    <label for='hsl'>HSL</label>
-                </div>
-                
-                
-
+                <!-- Button to generate color palette from color picker -->
                 <input type='submit' value='Get Color' 
                 class='btn color-btn' id='color-btn'
                 title='Get color from color-picker'/>
 
+                <!-- Button to save generate color palette from color picker -->
+                <!-- and then save the generated color palette -->
                 <button type='button'
                     class='btn save-btn' id='save-btn'>Save Color</button>
             </form>
 
+
+            <!-- Container for generated color palette -->
             <div class='container color-container' id='color-container'>
+
+                <!-- Each generated palette -->
                 <div class ='color-img-container' id='color-1'
                     data-color-id='1'>
                 </div>
@@ -131,18 +143,24 @@
                 </div>
             </div>
 
-            <!-- Saved Color -->
+
+            <!-- Saved color container-->
             <hr>
+
+            <!-- Title for saved color -->
             <div class='container save-title-container'>
                 Saved Colors
             </div>
 
+            <!-- Statuts message for saved color -->
             <div class='container save-status-message' id='save-status-message'>
                 Choose render format
             </div>
 
+            <!-- Container for color format to be rendered -->
             <div class='container save-radio-container'>
 
+                <!-- Selection of color format (radio) -->
                 <div>
                     <input type='radio' class='radio-option' id='save-hex' name='save-color-format' value='hex' checked>
                     <label for='hex'>HEX</label>
@@ -161,9 +179,12 @@
                 <button class='btn' id='render-save-color-btn'>Render</button>
             </div>
 
+
+            <!-- Rendering saved color (content to be populated with js)-->
             <div class='container' id='save-color-container'>
             </div>
 
+            <!-- Reference Container: GitHub Page and Color Mode Explanation -->
             <div class='container reference-container'>
                 <a href='https://github.com/wengti/color-generator'
                     target='_blank' class='reference-link'>
@@ -176,6 +197,7 @@
             </div>
         </main>
 
+        <!-- Footer -->
         <footer>
             <div class='container footer-container'>
                 Created by Weng Ti
